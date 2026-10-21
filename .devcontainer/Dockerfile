@@ -1,5 +1,5 @@
 # .devcontainer/Dockerfile
-FROM mcr.microsoft.com/devcontainers/base:ubuntu-22.04
+FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:ubuntu-22.04
 
 # Prevent interactive prompts during installation
 ENV DEBIAN_FRONTEND=noninteractive
