@@ -89,6 +89,20 @@ build/native-mygame/ps2run games/mygame/disc/SLUS_123.45 --disc games/mygame/dis
 
 The page puts a memory card in slot 1 and keeps it in the browser's storage for the address you play from, so progress survives a reload. Games format and use it as they would a real card. **Export card** downloads it as a `.ps2` file in the layout PCSX2 uses, and **Import card** puts such a file back in the slot, so a card can travel between browsers or come from PCSX2. `?nocard` starts with the slot empty.
 
+## Running in a devcontainer
+
+Open the repository in VS Code and choose **Reopen in Container**. Once the container is ready, run the dependency setup script from the repository root **before doing anything else**:
+
+```bash
+./dependency_fix.sh
+```
+When running in the devcontainer, you can only run the game in the browser:
+```
+scripts/port.sh mygame "My Game.iso"
+python3 scripts/serve.py build/web-mygame games/mygame/disc.iso 
+```
+
+
 ## Hosting
 
 The page uses SharedArrayBuffer for its threads, so it has to be served cross-origin isolated, with `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Embedder-Policy: require-corp`. `scripts/serve.py` sends both headers and supports the Range requests the disc streaming relies on. Anyone who can reach the server can load the game, so keep it to yourself.
